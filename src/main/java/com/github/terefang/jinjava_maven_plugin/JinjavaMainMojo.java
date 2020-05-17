@@ -160,11 +160,16 @@ public class JinjavaMainMojo extends AbstractMojo {
                         File localContext = null;
                         for(String _ext : StringUtils.split(localContextExtensions, " "))
                         {
+                            getLog().info(MessageFormat.format("checking extension {0}", _ext));
                             File _localContext = new File(resourcesDirectory, key+_ext);
                             if(_localContext.exists())
                             {
                                 localContext = _localContext;
                                 break;
+                            }
+                            else
+                            {
+                                getLog().info(MessageFormat.format("context not found: {0}", _localContext.getName()));
                             }
                         }
 
