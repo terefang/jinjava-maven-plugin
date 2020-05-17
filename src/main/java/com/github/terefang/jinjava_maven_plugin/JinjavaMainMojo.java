@@ -22,30 +22,58 @@ public class JinjavaMainMojo extends AbstractMojo {
 
     private static final String[] DEFAULT_INCLUDES = new String[]{"**/*.j2"};
 
+    /**
+     * The directory which contains jinja template files
+     */
     @Parameter(defaultValue = "${project.build.scriptSourceDirectory}")
     private File resourcesDirectory;
 
+    /**
+     * where to place the processed template files
+     */
     @Parameter(defaultValue = "${project.build.directory}/generated-resources/jinja")
     private File resourcesOutput;
 
+
+    /**
+     * additional global context
+     */
     @Parameter(defaultValue = "${project.build.directory}/jinja.yaml")
     private File additionalContext;
 
+    /**
+     * additional global context key
+     */
     @Parameter(defaultValue = "context")
     private String additionalContextRoot;
 
+    /**
+     * process local contexts
+     */
     @Parameter(defaultValue = "false")
     private boolean processLocalContext;
 
-    @Parameter(defaultValue = ".yaml,.yml,.json,.hson,.hjson,.properties")
+    /**
+     * local context extensions
+     */
+    @Parameter(defaultValue = ".yaml .yml .json .hson .hjson .properties")
     private String[] localContextExtensions;
 
+    /**
+     * local context key
+     */
     @Parameter(defaultValue = "local")
     private String localContextRoot;
 
+    /**
+     * list of includes. ant-style/double wildcards.
+     */
     @Parameter
     private String[] includes;
 
+    /**
+     * list of excludes. ant-style/double wildcards.
+     */
     @Parameter
     private String[] excludes;
 
