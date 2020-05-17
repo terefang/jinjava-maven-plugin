@@ -12,6 +12,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.util.DirectoryScanner;
 import org.codehaus.plexus.util.FileUtils;
+import org.codehaus.plexus.util.StringUtils;
 
 import java.io.*;
 import java.text.MessageFormat;
@@ -57,7 +58,7 @@ public class JinjavaMainMojo extends AbstractMojo {
      * local context extensions
      */
     @Parameter(defaultValue = ".yaml .yml .json .hson .hjson .properties")
-    private String[] localContextExtensions;
+    private String localContextExtensions;
 
     /**
      * local context key
@@ -124,7 +125,7 @@ public class JinjavaMainMojo extends AbstractMojo {
 
         if(additionalContext.exists())
         {
-            getLog().info(MessageFormat.format("loading context '{0}' from {1}", additionalContextRoot, additionalContext.getName()));
+            getLog().info(MessageFormat.format("loading context {0} from {1}", additionalContextRoot, additionalContext.getName()));
             context.put(additionalContextRoot, ContextUtil.loadContextFrom(additionalContext));
         }
 
@@ -157,7 +158,7 @@ public class JinjavaMainMojo extends AbstractMojo {
                     {
                         context.remove(localContextRoot);
                         File localContext = null;
-                        for(String _ext : localContextExtensions)
+                        for(String _ext : StringUtils.split(localContextExtensions, " "))
                         {
                             File _localContext = new File(resourcesDirectory, key+_ext);
                             if(_localContext.exists())
@@ -169,7 +170,7 @@ public class JinjavaMainMojo extends AbstractMojo {
 
                         if(localContext!=null)
                         {
-                            getLog().info(MessageFormat.format("loading context '{0}' from {1}", localContextRoot, localContext.getName()));
+                            getLog().info(MessageFormat.format("loading context {0} from {1}", localContextRoot, localContext.getName()));
                             context.put(localContextRoot, ContextUtil.loadContextFrom(localContext));
                         }
                     }
