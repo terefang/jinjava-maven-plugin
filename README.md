@@ -1,5 +1,7 @@
 # jinjava-maven-plugin
 
+*DEPRICATED: see https://github.com/terefang/template for a multifeatured successor*
+
 use the jitpack repository
 
 ```
