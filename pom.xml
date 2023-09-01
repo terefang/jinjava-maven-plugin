@@ -39,7 +39,7 @@
         <dependency>
             <groupId>org.hjson</groupId>
             <artifactId>hjson</artifactId>
-            <version>3.0.0</version>
+            <version>3.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.hubspot.jinjava</groupId>
